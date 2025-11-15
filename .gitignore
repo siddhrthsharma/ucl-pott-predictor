@@ -1,0 +1,28 @@
+# --- Data files ---
+data/
+*.csv
+*.xlsx
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Python cache ---
+__pycache__/
+*.pyc
+
+# --- Environment files ---
+.env
+*.env
+venv/
+.venv/
+.envrc
+
+# --- System / IDE files ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Package management ---
+*.egg-info/
+build/
+dist/
