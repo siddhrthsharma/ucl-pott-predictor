@@ -29,7 +29,6 @@ def load_file(path):
         elif path.endswith(".xlsx"):
             df = pd.read_excel(path)
         else:
-            print(f"Skipping unsupported file: {path}")
             return None
 
 
@@ -37,7 +36,6 @@ def load_file(path):
         return df
 
     except Exception as e:
-        print(f"Error loading {path}: {e}")
         return None
 
 
@@ -46,7 +44,6 @@ def merge_all():
     files = glob.glob(os.path.join(RAW_DIR, "*"))
 
     if not files:
-        print("No files found in data/raw/kaggle/")
         return
 
     print("Found files:")
@@ -61,17 +58,12 @@ def merge_all():
             dfs.append(df)
 
     if not dfs:
-        print("No valid data files to merge.")
         return
 
-    print("\nConcatenating datasets vertically...")
     combined = pd.concat(dfs, ignore_index=True)
 
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     combined.to_csv(OUT_PATH, index=False)
-
-    print(f"\nSaved merged dataset → {OUT_PATH}")
-    print(f"Final shape: {combined.shape}")
 
 
 if __name__ == "__main__":
