@@ -31,7 +31,6 @@ def load_file(path):
         else:
             return None
 
-
         df = normalize_columns(df)
         return df
 
