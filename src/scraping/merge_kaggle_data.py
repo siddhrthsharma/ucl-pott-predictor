@@ -37,25 +37,17 @@ def load_file(path):
         return None
 
 def process_attacking_file(df):
-    """
-    Process attacking.csv file specifically for 21/22 season data.
-    Adds season information and renames columns to match the main dataset.
-    """
     df = df.copy()
     
-    # Add season information for 21/22
     df['season_year'] = '21/22'
     df['season'] = 'UEFA Champions League 21/22'
     
-    # Rename columns to match processed file structure
     df = df.rename(columns={
         'player_name': 'name',
         'club': 'team',
         'match_played': 'matchesstarted'
     })
     
-    # Add specific goal corrections for known players (e.g., Benzema scored 15 goals in 21/22)
-    # This can be expanded for other players if needed
     if 'name' in df.columns:
         df.loc[df['name'].str.contains('Benzema', case=False, na=False), 'goals'] = 15
     
@@ -79,7 +71,6 @@ def merge_all():
             filename = os.path.basename(f)
             print(f"Loaded {filename} -> shape {df.shape}")
             
-            # Special processing for attacking.csv (21/22 season data)
             if 'attacking' in filename.lower():
                 print(f"  → Processing {filename} as 21/22 season attacking data")
                 df = process_attacking_file(df)
